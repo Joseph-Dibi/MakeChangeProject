@@ -11,8 +11,8 @@ public class ChangeMaker {
 		double cost = itemPrice(); //Asks item price
 		System.out.println("$" + cost);
 
-		moneyTendered(cost); //Takes price in
-		//System.out.printf("\n" + "CHANGE OWED: %.2f%n");
+		moneyTendered(cost); //Takes price in and basically does the rest.
+		//System.out.printf("\n" + "CHANGE OWED: %.2f%n"); <- potential format way
 
 	}
 
@@ -39,13 +39,14 @@ public class ChangeMaker {
 			System.out.println("You paid: $" + moneyPaid);
 			change = moneyPaid - cost;
 			new DecimalFormat("$#.00").format(change);
+			//I can't figure out the format for decimals. Try to fix formatter/try new one.
 			System.out.println("Your change is $" + change);
 			dollar = (int)Math.floor(change/dollar);
 			quarter = (int)Math.floor((change-dollar)/quarter);
 			dime = (int)Math.floor((change-dollar-quarter)/dime);
 			nickel = (int)Math.floor((change-dollar-quarter-dime)/nickel);
 			pennies = (int)Math.floor((change-dollar-quarter-dime-nickel)/pennies);
-			
+			//tiny numbers go crazy. I think this happens because I am casting to ints.
 			System.out.println("Your change today is ");
 			if (dollar > 1) {
 				System.out.print("" + dollar + " Dollars, ");
@@ -80,7 +81,7 @@ public class ChangeMaker {
 			
 			
 			
-			
+			// if They need to pay more. Can flesh out later. functions for now.
 		} else if (cost > moneyPaid) {
 			moreMoney = Math.abs(moneyPaid - cost);
 			System.out.println("I am sorry, but we need $" + moreMoney
@@ -97,7 +98,7 @@ public class ChangeMaker {
 		}
 
 	}
-
+//asks for cost of customers items, returns it. Works great. Only thing at this point ha
 	private static double itemPrice() {
 		double itemCost = 0;
 		System.out.println("What was the cost of the customer's items today? ");
