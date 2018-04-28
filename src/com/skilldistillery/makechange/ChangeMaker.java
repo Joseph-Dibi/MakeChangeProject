@@ -22,7 +22,7 @@ public class ChangeMaker {
 		double fiveDollar = 5;
 		double twentyDollar = 20;
 
-		System.out.println("Your change is $" + change);
+		System.out.printf("Your Change: $ %.2f%n",change);
 //these amount are then deducted from change if they are able to be divided at least once.
 		//larger dollar amounts had to be reset to their value versus the amount before being deducted.
 		twentyDollar = (int) Math.floor(change / twentyDollar);
@@ -50,9 +50,9 @@ public class ChangeMaker {
 				System.out.print("1 five dollar bill, ");
 			}
 			if (dollar > 1) {
-				System.out.println("and " + (int) dollar + " dollars");
+				System.out.print((int) dollar + " dollars");
 			} else if (dollar == 1) {
-				System.out.println("and 1 Dollar");
+				System.out.print(" 1 Dollar");
 			}
 			System.out.println(".");
 		}
@@ -84,9 +84,9 @@ public class ChangeMaker {
 				System.out.print(" one Nickel, ");
 			}
 			if (pennies > 1) {
-				System.out.println(" and " + (int) pennies + " Pennies");
+				System.out.print((int) pennies + " Pennies");
 			} else if (pennies == 1) {
-				System.out.println("and one Penny");
+				System.out.print(" one Penny");
 			}
 			System.out.println(".");
 		}
@@ -109,7 +109,7 @@ public class ChangeMaker {
 			moneyTendered(change);
 		} else if (itemCost > moneyPaid) {
 			moreMoney = Math.abs(moneyPaid - itemCost);
-			System.out.print("I am sorry, but we need at least $" + moreMoney + " to complete this transaction.\n$");
+			System.out.printf("I am sorry, but we need at least $ %.2f%n",moreMoney);
 			double addingCorrectChange = sc.nextDouble();
 
 			while (!(itemCost == moneyPaid + addingCorrectChange || itemCost < moneyPaid + addingCorrectChange)) {
