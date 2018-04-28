@@ -71,22 +71,22 @@ public class ChangeMaker {
 			if (quarter > 1) {
 				System.out.print("" + (int) quarter + " Quarters,");
 			} else if (quarter == 1) {
-				System.out.print(" one Quarter, ");
+				System.out.print(" 1 Quarter, ");
 			}
 			if (dime > 1) {
 				System.out.print("" + (int) dime + " dimes,");
 			} else if (dime == 1) {
-				System.out.print(" one Dime, ");
+				System.out.print(" 1 Dime, ");
 			}
 			if (nickel > 1) {
 				System.out.print("" + (int) nickel + " Nickels,");
 			} else if (nickel == 1) {
-				System.out.print(" one Nickel, ");
+				System.out.print(" 1 Nickel, ");
 			}
 			if (pennies > 1) {
 				System.out.print((int) pennies + " Pennies");
 			} else if (pennies == 1) {
-				System.out.print(" one Penny");
+				System.out.print(" 1 Penny");
 			}
 			System.out.println(".");
 		}
@@ -104,12 +104,13 @@ public class ChangeMaker {
 		System.out.print("How much money are you going to give me? Keep in mind, I am excellent at making change. $");
 		moneyPaid = sc.nextDouble();
 		if (itemCost < moneyPaid) {
-			System.out.println("You paid: $" + moneyPaid);
+			System.out.printf("You paid: $ %.2f%n",moneyPaid);
 			change = moneyPaid - itemCost;
 			moneyTendered(change);
 		} else if (itemCost > moneyPaid) {
 			moreMoney = Math.abs(moneyPaid - itemCost);
 			System.out.printf("I am sorry, but we need at least $ %.2f%n",moreMoney);
+			System.out.print("$");
 			double addingCorrectChange = sc.nextDouble();
 
 			while (!(itemCost == moneyPaid + addingCorrectChange || itemCost < moneyPaid + addingCorrectChange)) {
@@ -120,6 +121,7 @@ public class ChangeMaker {
 			if (itemCost == moneyPaid + addingCorrectChange) {
 				System.out.println("You don't get a prize for paying exact change...");
 			} else {
+				System.out.printf("You paid: $ %.2f%n",moneyPaid+addingCorrectChange);
 				change = moneyPaid + addingCorrectChange - itemCost;
 				// call your tender method here
 				moneyTendered(change);
