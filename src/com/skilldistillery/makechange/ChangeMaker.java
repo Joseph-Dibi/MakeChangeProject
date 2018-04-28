@@ -1,5 +1,6 @@
 package com.skilldistillery.makechange;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class ChangeMaker {
@@ -7,7 +8,6 @@ public class ChangeMaker {
 	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-
 		double cost = itemPrice(); //Asks item price
 		System.out.println("$" + cost);
 
@@ -16,6 +16,14 @@ public class ChangeMaker {
 
 	}
 
+//	private static double decimalFormatter(double num);{
+//		double num1 = num;
+//		new DecimalFormat("$#.00").format(num1);
+//		
+//		return num;
+//		
+//	}
+	
 	private static void moneyTendered(double cost) {
 		System.out.println("How much did the customer pay you? ");
 		double moneyPaid = sc.nextDouble();
@@ -25,18 +33,19 @@ public class ChangeMaker {
 		double quarter = .25;
 		double dime = .1;
 		double nickel = .05;
-		double penny = .01;
+		double pennies = .01;
 		
-				//twenties = (int) Math.floor(cashowed/TWENTIES);
 		if (cost < moneyPaid) {
 			System.out.println("You paid: $" + moneyPaid);
 			change = moneyPaid - cost;
 			System.out.println("Your change is $" + change);
 			dollar = (int)Math.floor(change/dollar);
-			quarter = (int)Math.floor(change/quarter);
-			nickel = (int)Math.floor(change/nickel);
+			quarter = (int)Math.floor((change-dollar)/quarter);
+			dime = (int)Math.floor((change-dollar-quarter)/dime);
+			nickel = (int)Math.floor((change-dollar-quarter-dime)/nickel);
+			pennies = (int)Math.floor((change-dollar-quarter-dime-nickel)/pennies);
 			
-			System.out.println("" + dollar + "\t" + quarter + "\t" + nickel);
+			System.out.println("" + dollar + "\t" + quarter + "\t" + dime + "\t" + nickel + "\t" + pennies);
 			
 			
 			
