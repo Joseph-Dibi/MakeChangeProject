@@ -34,25 +34,46 @@ public class ChangeMaker {
 		double dime = .10;
 		double nickel = .05;
 		double pennies = .01;
+		double tenDollar = 10;
+		double fiveDollar = 5;
 		
 		if (cost < moneyPaid) {
 			System.out.println("You paid: $" + moneyPaid);
 			change = moneyPaid - cost;
-			new DecimalFormat("$#.00").format(change);
+			//new DecimalFormat("$#.00").format(change);
 			//I can't figure out the format for decimals. Try to fix formatter/try new one.
 			System.out.println("Your change is $" + change);
-			dollar = (int)Math.floor(change/dollar);
-			quarter = (int)Math.floor((change-dollar)/quarter);
-			dime = (int)Math.floor((change-dollar-(quarter*.25))/dime);
-			nickel = (int)Math.floor((change-dollar-(quarter*.25)-(dime*.1))/nickel);
-			pennies = (int)Math.floor((change-dollar-(quarter*.25)-(dime*.1)-(nickel*.05))/pennies);
-			//tiny numbers go crazy. I think this happens because I am casting to ints.
-			System.out.println("Your change today is ");
-			if (dollar > 1) {
-				System.out.print("" + dollar + " Dollars, ");
-			} else if (dollar == 1) {
-				System.out.print("one Dollar, ");
+			
+			tenDollar = (int)Math.floor(change/tenDollar);
+			fiveDollar = (int)Math.floor((change-(tenDollar*10))/fiveDollar);
+			dollar = (int)Math.floor((change-(tenDollar*10)-(fiveDollar*5))/dollar);
+			double changeLeft = change-(tenDollar*10)-(fiveDollar*5)-dollar;
+			System.out.println("Your bills are: ");
+			if (tenDollar > 1) {
+				System.out.print("" + tenDollar + " ten dollar bills, ");
+			} else if (tenDollar == 1) {
+				System.out.print("1 ten dollar bill, ");
 			}
+			if (fiveDollar > 1) {
+				System.out.print("" + fiveDollar + " five dollar bills, ");
+			} else if (fiveDollar == 1) {
+				System.out.print("1 five dollar bill, ");
+			}
+			if (dollar > 1) {
+				System.out.print("and " + dollar + " dollars. ");
+			} else if (dollar == 1) {
+				System.out.print("and 1 Dollar. ");
+			}
+			System.out.println("Your coins are ");
+			
+			//going to split change from dollars and add other bills
+			quarter = (int)Math.floor((changeLeft)/quarter);
+			dime = (int)Math.floor((changeLeft-(quarter*.25))/dime);
+			nickel = (int)Math.floor((changeLeft-(quarter*.25)-(dime*.1))/nickel);
+			pennies = (int)Math.floor((changeLeft-(quarter*.25)-(dime*.1)-(nickel*.05))/pennies+.01);
+			//tiny numbers go crazy. I think this happens because I am casting to ints.
+			System.out.print("Your change today is ");
+		
 			if (quarter > 1) {
 				System.out.print("" + quarter + " Quarters,");
 			} else if (quarter == 1) {
@@ -61,7 +82,7 @@ public class ChangeMaker {
 			if (dime > 1) {
 				System.out.print("" + dime + " dimes,");
 			} else if(dime == 1) {
-				System.out.println(" one Dime, ");
+				System.out.print(" one Dime, ");
 			}
 			if (nickel > 1) {
 				System.out.print("" + nickel + " Nickels,");
@@ -74,8 +95,6 @@ public class ChangeMaker {
 				System.out.println("and one Penny!");
 			}
 			
-			
-			System.out.println("" + dollar + "\t" + quarter + "\t" + dime + "\t" + nickel + "\t" + pennies);
 			
 			
 			
