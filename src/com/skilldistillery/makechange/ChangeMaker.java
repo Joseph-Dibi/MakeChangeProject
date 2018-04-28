@@ -31,19 +31,48 @@ public class ChangeMaker {
 		double change = 0;
 		double dollar = 1;
 		double quarter = .25;
-		double dime = .1;
+		double dime = .10;
 		double nickel = .05;
 		double pennies = .01;
 		
 		if (cost < moneyPaid) {
 			System.out.println("You paid: $" + moneyPaid);
 			change = moneyPaid - cost;
+			new DecimalFormat("$#.00").format(change);
 			System.out.println("Your change is $" + change);
 			dollar = (int)Math.floor(change/dollar);
 			quarter = (int)Math.floor((change-dollar)/quarter);
 			dime = (int)Math.floor((change-dollar-quarter)/dime);
 			nickel = (int)Math.floor((change-dollar-quarter-dime)/nickel);
 			pennies = (int)Math.floor((change-dollar-quarter-dime-nickel)/pennies);
+			
+			System.out.println("Your change today is ");
+			if (dollar > 1) {
+				System.out.print("" + dollar + " Dollars, ");
+			} else if (dollar == 1) {
+				System.out.print("one Dollar, ");
+			}
+			if (quarter > 1) {
+				System.out.print("" + quarter + " Quarters,");
+			} else if (quarter == 1) {
+				System.out.print(" one Quarter, ");
+			}
+			if (dime > 1) {
+				System.out.print("" + dime + " dimes,");
+			} else if(dime == 1) {
+				System.out.println(" one Dime, ");
+			}
+			if (nickel > 1) {
+				System.out.print("" + nickel + " Nickels,");
+			} else if (nickel == 1) {
+				System.out.print(" one Nickel, ");
+			}
+			if (pennies > 1) {
+				System.out.println(" and " + pennies + " Pennies.");
+			} else if (pennies == 1) {
+				System.out.println("and one Penny!");
+			}
+			
 			
 			System.out.println("" + dollar + "\t" + quarter + "\t" + dime + "\t" + nickel + "\t" + pennies);
 			
