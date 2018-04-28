@@ -43,9 +43,9 @@ public class ChangeMaker {
 			System.out.println("Your change is $" + change);
 			dollar = (int)Math.floor(change/dollar);
 			quarter = (int)Math.floor((change-dollar)/quarter);
-			dime = (int)Math.floor((change-dollar-quarter)/dime);
-			nickel = (int)Math.floor((change-dollar-quarter-dime)/nickel);
-			pennies = (int)Math.floor((change-dollar-quarter-dime-nickel)/pennies);
+			dime = (int)Math.floor((change-dollar-(quarter*.25))/dime);
+			nickel = (int)Math.floor((change-dollar-(quarter*.25)-(dime*.1))/nickel);
+			pennies = (int)Math.floor((change-dollar-(quarter*.25)-(dime*.1)-(nickel*.05))/pennies);
 			//tiny numbers go crazy. I think this happens because I am casting to ints.
 			System.out.println("Your change today is ");
 			if (dollar > 1) {
@@ -95,7 +95,7 @@ public class ChangeMaker {
 			System.out.println("Thank you for paying the full amount.");
 		} else {
 			System.out.println("Thank you for paying the full amount, Have a nice day.");
-		}
+		} //if customer pays the full amount the first time, we're done. I wish more customers were like this.
 
 	}
 //asks for cost of customers items, returns it. Works great. Only thing at this point ha
