@@ -1,20 +1,18 @@
 package com.skilldistillery.makechange;
 
-import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class ChangeMaker {
 
-	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		runProgram();
 
 	}
-
+//moneyTendered starts by initializing variable change amounts. 
+	//change is also brought in from runProgram.
 	private static void moneyTendered(double change) {
 
-		double moreMoney = 0;
 		double dollar = 1;
 		double quarter = .25;
 		double dime = .10;
@@ -25,13 +23,15 @@ public class ChangeMaker {
 		double twentyDollar = 20;
 
 		System.out.println("Your change is $" + change);
-
+//these amount are then deducted from change if they are able to be divided at least once.
+		//larger dollar amounts had to be reset to their value versus the amount before being deducted.
 		twentyDollar = (int) Math.floor(change / twentyDollar);
 		tenDollar = (int) Math.floor((change - (twentyDollar * 20)) / tenDollar);
 		fiveDollar = (int) Math.floor((change - (twentyDollar * 20) - (tenDollar * 10)) / fiveDollar);
 		dollar = (int) Math.floor((change - (twentyDollar * 20) - (tenDollar * 10) - (fiveDollar * 5)) / dollar);
 		double changeLeft = change - (twentyDollar * 20) - (tenDollar * 10) - (fiveDollar * 5) - dollar;
 
+		//this is so dollars only show if dollars are present
 		if (tenDollar + fiveDollar + dollar + twentyDollar > 0) {
 			System.out.print("Your bills are: ");
 			if (twentyDollar > 1) {
@@ -57,12 +57,15 @@ public class ChangeMaker {
 			System.out.println(".");
 		}
 
-		// going to split change from dollars and add other bills
+		// coin change is split off dollars for simplicty and readibility, especially in adding larger dollars
 		quarter = (int) Math.floor((changeLeft) / quarter);
 		dime = (int) Math.floor((changeLeft - (quarter * .25)) / dime);
 		nickel = (int) Math.floor((changeLeft - (quarter * .25) - (dime * .1)) / nickel);
 		pennies = (int) Math.floor((changeLeft - (quarter * .25) - (dime * .1) - (nickel * .05)) / pennies + .01);
-		// tiny numbers go crazy. I think this happens because I am casting to ints.
+		// tiny numbers go crazy. I think this happens because I am casting to ints. 
+		// this is fixed by the addition of .01. successful rounding of change before this may remove that need
+		
+		//this is so coins only show if coins are present
 		if (changeLeft + quarter + dime + nickel + pennies > 0) {
 			System.out.print("Your coins are:  ");
 			if (quarter > 1) {
@@ -89,31 +92,13 @@ public class ChangeMaker {
 		}
 	}
 
-	// // if They need to pay more. Can flesh out later. functions for now.
-	// } else if (cost > moneyPaid) {
-	// moreMoney = Math.abs(moneyPaid - cost);
-	// System.out.println("I am sorry, but we need $" + moreMoney
-	// + " to complete this transaction. Please pay the difference.");
-	// double addingCorrectChange = sc.nextDouble();
-	//
-	// while (!(cost == moneyPaid + addingCorrectChange)) {
-	// System.out.println("That is not the full amount, please pay the full
-	// amount.");
-	// addingCorrectChange = sc.nextDouble();
-	// }
-	// System.out.println("Thank you for paying the full amount.");
-	// // call your tender method here
-	// moneyTendered(cost);
-	// } else {
-	// System.out.println("Thank you for paying the full amount, Have a nice day.");
-	// } // if customer pays the full amount the first time, we're done. I wish more
-	// // customers were like this.
-
-	// asks for cost of customers items, returns it. Works great. Only thing at this
-	// point ha
+	//Run program asks the user for data input on item cost and amount they are paying.
+	//if item cost > the cash they give the program will insist that they give the proper amount (You cant walk away without paying! you also can't choose not to buy it, but eh.)
+	//if they pay exact change, the program finishes. regardless of it happened on one try or several.
+	//if they pay over and need change then the moneyTendered program runs and they receive change.
 	private static void runProgram() {
 		double itemCost, moreMoney, moneyPaid, change = 0;
-
+		Scanner sc = new Scanner(System.in);
 		System.out.print("How much did your items cost? $");
 		itemCost = sc.nextDouble();
 		System.out.print("How much money are you going to give me? Keep in mind, I am excellent at making change. $");
@@ -124,11 +109,11 @@ public class ChangeMaker {
 			moneyTendered(change);
 		} else if (itemCost > moneyPaid) {
 			moreMoney = Math.abs(moneyPaid - itemCost);
-			System.out.println("I am sorry, but we need at least $" + moreMoney + " to complete this transaction.");
+			System.out.print("I am sorry, but we need at least $" + moreMoney + " to complete this transaction.\n$");
 			double addingCorrectChange = sc.nextDouble();
 
 			while (!(itemCost == moneyPaid + addingCorrectChange || itemCost < moneyPaid + addingCorrectChange)) {
-				System.out.println("That is not the full amount, please pay at least the cost of the item.");
+				System.out.print("That is not the full amount, please pay at least the cost of the item.\n$");
 				addingCorrectChange = sc.nextDouble();
 			}
 
@@ -142,6 +127,7 @@ public class ChangeMaker {
 		} else {
 			System.out.println("You don't get a prize for paying exact change...");
 		}
+		sc.close();
 	}
 
 }
