@@ -5,21 +5,40 @@ import java.util.Scanner;
 public class MakeChangeApp {
 
 	static Scanner sc = new Scanner(System.in);
+
 	public static void main(String[] args) {
-		
+
 		double cost = itemPrice();
-		System.out.println(cost);
+		System.out.println("$" + cost);
+
+		double difference = moneyTendered(cost);
+		System.out.println(difference);
 		
-		
-		
-			
+
+	}
+
+	private static double moneyTendered(double cost) {
+		System.out.println("How much did the customer pay you? ");
+		double moneyPaid = sc.nextDouble();
+		double moreMoney = 0;
+		if (cost == moneyPaid) {
+			System.out.println("Thank you, that is correct change. Have a nice day.");
+		}
+		else if ( cost > moneyPaid) {
+			moreMoney = Math.abs(moneyPaid - cost);
+			System.out.println("I am sorry, but we need $" + moreMoney + " to complete this transaction.");
+		}
+		else {
+			System.out.println("I need to give change, this is a placeholder.");
+		}
+		return moreMoney;
 	}
 
 	private static double itemPrice() {
 		double itemCost = 0;
-		System.out.println("What was the price of your items today? ");
+		System.out.println("What was the cost of the customer's items today? ");
 		itemCost = sc.nextDouble();
-		
+
 		return itemCost;
 	}
 
