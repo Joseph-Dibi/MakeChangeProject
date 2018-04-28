@@ -26,7 +26,14 @@ public class MakeChangeApp {
 		}
 		else if ( cost > moneyPaid) {
 			moreMoney = Math.abs(moneyPaid - cost);
-			System.out.println("I am sorry, but we need $" + moreMoney + " to complete this transaction.");
+			System.out.println("I am sorry, but we need $" + moreMoney + " to complete this transaction. Please pay the difference.");
+			double addingCorrectChange = sc.nextDouble();
+			
+			while (!(cost == moneyPaid + addingCorrectChange)) {
+				System.out.println("That is not the full amount, please pay the full amount.");
+				addingCorrectChange = sc.nextDouble();
+			}
+			System.out.println("Thank you for paying the full amount.");	
 		}
 		else {
 			System.out.println("I need to give change, this is a placeholder.");
